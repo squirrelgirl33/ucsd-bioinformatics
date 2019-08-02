@@ -5,7 +5,9 @@ Created on Tue Jun 11 22:13:08 2019
 @author: Kathryn
 """
 
-sample = open('dataset_2_7.txt', 'r').read().split('\n')
+folder = "data"
+
+sample = open(folder+'/dataset_2_7.txt', 'r').read().split('\n')
 sample
 
 Text = sample[0]
@@ -55,7 +57,7 @@ bob["george"] += 1
 
 bob["larry"] = 1
 
-sample = open('dataset_2_10.txt', 'r').read().split('\n')
+sample = open(folder+'/dataset_2_10.txt', 'r').read().split('\n')
 Text = sample[0]
 k = sample[1]
 
@@ -79,7 +81,7 @@ def ReverseComplement(text1):
             output+="C"
     return output
 
-sample = open('dataset_3_2.txt', 'r').read().split('\n')
+sample = open(folder+'/dataset_3_2.txt', 'r').read().split('\n')
 Text = sample[0]
 
 ReverseComplement(Text)
@@ -99,7 +101,7 @@ text[0:4]
 
 PatternMatching(pattern, text)
 
-sample = open('dataset_3_5.txt', 'r').read().split('\n')
+sample = open(folder+'/dataset_3_5.txt', 'r').read().split('\n')
 pattern = sample[0]
 text = sample[1]
 
@@ -138,10 +140,10 @@ Clump(text, 8, 28, 3)
 
 BetterClumpFinding(text, 8, 28, 3)
 
-sample = open('dataset_4_5.txt', 'r').read().split('\n')
+sample = open(folder+'/dataset_4_5.txt', 'r').read().split('\n')
 text = sample[0]
 sample[1]
-ecoli = open('E_coli.txt', 'r').read().split('\n')
+ecoli = open(folder+'/E_coli.txt', 'r').read().split('\n')
 ecoli1=ecoli[0]
 ecoli1[0:30]
 Clump(ecoli1, 9, 500, 3)
@@ -228,12 +230,12 @@ max(x)
 
 max(x.values())
 
-sample = open("dataset_2994_5.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_2994_5.txt", 'r').read().split("\n")
 Text = sample[0]
 k = sample[1]
 k
 x = ComputingFrequencies(Text, 5)
-f = open("answer.txt", 'w')
+f = open(folder+"/answer.txt", 'w')
 f.write()
 
 def FasterFrequentWords(Text, k):
@@ -278,12 +280,12 @@ def PatternToNumber2(Pattern):
 
 PatternToNumber(pattern)
 
-sample = open("dataset_3010_2.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_3010_2.txt", 'r').read().split("\n")
 pattern = sample[0]
 
 NumberToPattern(8308, 11)
 
-sample = open("dataset_3010_5.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_3010_5.txt", 'r').read().split("\n")
 
 z = {1: 3, 20: 2, 4: 2}
 
@@ -382,7 +384,7 @@ def MinSkew(Genome):
 MinSkew("TAAAGACTGCCGAGAGGCCAACACGAGTGCTAGAACGAGGGGCGTAAACGCGGGTCCGAT")
 
 
-sample = open("dataset_7_6.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_7_6.txt", 'r').read().split("\n")
 text = sample[0]
 
 MinSkew(text)
@@ -400,7 +402,7 @@ def HammingDistance(p, q):
 p="GGGCCGTTGGT"
 q="GGACCGTTGAC"
 
-sample=open("dataset_9_3.txt", 'r').read().split("\n")
+sample=open(folder+"/dataset_9_3.txt", 'r').read().split("\n")
 p = sample[0]
 q=sample[1]
 
@@ -435,7 +437,7 @@ ApproxPatternMatch("CCC", "CATGCCATTCGCATTGTCCCAGTGA", 2)
 Pattern = "ATTCTGGA"
 Text = "CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACGGACGTCAATCAAAT"
 
-sample=open("dataset_9_4.txt", 'r').read().split("\n")
+sample=open(folder+"/dataset_9_4.txt", 'r').read().split("\n")
 Pattern = sample[0]
 Text=sample[1]
 sample[2]
@@ -451,7 +453,7 @@ Count2("CATGCCATTCGCATTGTCCCAGTGA", "CCC")
 
 ApproxPatternMatch("GAGG","TTTAGAGCCTTCAGAGG", 2)
 
-sample = open("dataset_9_6.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_9_6.txt", 'r').read().split("\n")
 Pattern= sample[0]
 Text=sample[1]
 n=sample[2]
@@ -491,7 +493,7 @@ Text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
    
 FrequentMismatch(Text, 4, 1)
 
-sample = open("dataset_9_7.txt", 'r').read().split('\n')
+sample = open(folder+"/dataset_9_7.txt", 'r').read().split('\n')
 Text=sample[0]
 sample[1]
 sample[2]
@@ -535,7 +537,7 @@ FrequentMismatch(test, 4, 1)
 
 HammingDistance("CTTGAAGTGGACCTCTAGTTCCTCTACAAAGAACAGGTTGACCTGTCGCGAAG", "ATGCCTTACCTAGATGCAATGACGGACGTATTCCTTTTGCCTCAACGGCTCCT")
 
-sample=open("dataset_9_8.txt", 'r').read().split("\n")
+sample=open(folder+"/dataset_9_8.txt", 'r').read().split("\n")
 text=sample[0]
 sample[1]
 FrequentMismatchRC(text, 5, 2)
@@ -636,7 +638,7 @@ MotifEnumeration(test, 3, 0)
 text = ["ATTTGGC", "TGCCTTA", "CGGTATC", "GAAAATT"]
 MotifEnumeration(text, 3, 1)
 
-text = open("dataset_156_8.txt", 'r').read().split("\n")
+text = open(folder+"/dataset_156_8.txt", 'r').read().split("\n")
 thing = text[1:len(text)-1]
 text[0]
 
@@ -881,7 +883,7 @@ d("GAC", Dna)
 
 MedianString(Dna, 3)
 
-sample = open("dataset_158_9.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_158_9.txt", 'r').read().split("\n")
 text = sample[0]
 text2 = sample[1]
 Dna = ['TGTTGGAAATATCACGTGGACCCTCTCGTGCAGTGGATATAA',
@@ -934,7 +936,7 @@ profile = {
 
 ProfileMostProbableKmer("ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATATAGCCCGAGGGCCT",5, profile)
 
-sample = open("dataset_159_3.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_159_3.txt", 'r').read().split("\n")
 text=sample[0]
 
 profile = {
@@ -987,7 +989,7 @@ def GreedyMotifSearch(Dna, k, t):
             BestMotifs=Motifs
     return BestMotifs
 
-sample=open("dataset_159_5.txt", 'r').read().split("\n")
+sample=open(folder+"/dataset_159_5.txt", 'r').read().split("\n")
 Dna = ['GTACAAGTGAACGGCTGTTTACAGTCGGAGTAGCAGGTCTTCTGTTATTGGCGATGGCCGGTATATACGAAAGGCGAAGCGTGGTGCGATCTCTTTGCCTGTGCTCTCCGAATCCCTAGGGAGCGCAATCATAGGCTCTCCCTGCAAATGGAGCGT',
  'TAAACATAAGCCACCGGCTCCCTCTTTAAGCACAGCCCACCGCACAGAACCGATGCGTCCGATGAAATCAGTGACTGGTGGAAGTTAAGAGCTCTAGGCTGTCGACGCGCCTCGCTCTCGGTCCCCCCTTGAAGGGCCTCCCTGTAGTCAGGACAA',
  'AAACTCGCTGAGTTTAACTGCGCCGTCGTCTCTGGTTCAGGTGTGCTAAAGCCAGGTCCATTTGGCACTTAGACATGCACTCACATTTTCCTTCTGCGGACCTCCCTGTGGCACTTATAGCAAGAGGATTCACCCGAAGGACCGTCCGGAAAAATA',
@@ -1020,7 +1022,7 @@ print(*text, sep=" ")
 
 print(*list(sequences.keys()), sep=" ")
 
-sample = open("dataset_160_9.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_160_9.txt", 'r').read().split("\n")
 text = ['GAGCCCCATTCCGCGCGATGCTCCTTACCGAGGGTTTCGCGAAAGGCTCACATGCTAGTTAGTTCGGCGAAGACAGCTGTGGGAGTTATCCGGCCCCTGTGCCCTAAGCAGTTTTGGATTACTGTCCGATTGATGCGCAGCTCAGACTCTTAGTCT',
  'TCACGGCCTGTGTTGATCGGTCCTAGAGTACAAGTACACCATACGAAAGAATACGTCCGTGCAGGCGGAACGCCATGTGTTAAATGCCCTGAAGATGTAATAAGGGAGGAGACTCTAGTTCCCTGCCACATACCCAACGTAACCAGTAGTTCCAAA',
  'ATTCCCCGAGTCGTTTCTAAAGACCGCACGTTAATTCGCGAGGGGAGAACTAGATAATGCAGCGAAACGGCGAACGCGCTAGAAGTTGAAGGTACCCCAGCCAGCGGTAACATATAAAGAATGTAATATCGTCTTACTCTCAGGCAAAGGCTAGTT',
@@ -1058,7 +1060,7 @@ text = ["GGCGTTCAGGCA",
 
 GreedyMotifSearch(text, 3, 5)
 
-sample = open("dataset_5164_1.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_5164_1.txt", 'r').read().split("\n")
 pattern = sample[0]
 text = sample[1].split(" ")
 
@@ -1172,7 +1174,7 @@ test = ["TGA", "GTT", "GAA", "TGT"]
 profile = ProfileWithPseudocounts(test)
 Motifs(profile, DNA)
 
-sample = open("dataset_161_5.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_161_5.txt", 'r').read().split("\n")
 text = sample[1:len(sample)-1]
 text[0]
 len(text)
@@ -1275,8 +1277,8 @@ test = {"seq1": .6,
 
 #Gibbs Sampler Problem
 
-sample = open("dataset_163_4.txt", 'r').read().split("\n")
-sample = open("gibbs.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_163_4.txt", 'r').read().split("\n")
+sample = open(folder+"/gibbs.txt", 'r').read().split("\n")
 sample[0]
 text = sample[1:len(sample)-1]
 text[len(text)-1]
@@ -1487,7 +1489,7 @@ def Consensus(Motifs):
         consensus += frequentSymbol
     return consensus
 
-sample = open("upstream250.txt", 'r').readlines()
+sample = open(folder+"/upstream250.txt", 'r').readlines()
 
 " for python3"
 from itertools import groupby
