@@ -7,18 +7,19 @@ Created on Tue Jun 11 22:13:08 2019
 
 folder = "data"
 
-sample = open(folder+'/dataset_2_7.txt', 'r').read().split('\n')
+sample = open(folder+'/dataset_2_7.txt', 'r').read().splitlines()
+
 sample
 
-Text = sample[0]
-Pattern = sample[1]
+text = sample[0]
+pattern = sample[1]
 
-len(Pattern)
+len(pattern)
 
-def PatternCount(Text, Pattern):
+def PatternCount(text, pattern):
     count = 0
-    for i in range(len(Text)-len(Pattern)+1):
-        if Pattern == Text[i:(i+len(Pattern))]:
+    for i in range(len(text)-len(pattern)+1):
+        if pattern == text[i:(i+len(pattern))]:
             count += 1
     return count
 
@@ -26,27 +27,27 @@ text = "AGCGTGCCGAAATATGCCGCCAGACCTGCTGCGGTGGCCTCGCCGACTTCACGGATGCCAAGTGCATAGAGG
 
 PatternCount(text, "TTT")
 
-PatternCount(Text, Pattern)
+PatternCount(text, pattern)
 
-def FrequentWords(Text, k):
-    FrequentPatterns = {}
+def FrequentWords(text, k):
+    freq_patt = {}
     count = 0
-    for i in range(len(Text)-k+1):
-        pattern = Text[i:i+k]
-        counti = PatternCount(Text, pattern)
-        FrequentPatterns[pattern] = counti
+    for i in range(len(text)-k+1):
+        pattern = text[i:i+k]
+        counti = PatternCount(text, pattern)
+        freq_patt[pattern] = counti
     pat = []
-    m = max(FrequentPatterns.values())
-    for key in FrequentPatterns:
-        if FrequentPatterns[key]==m:
+    m = max(freq_patt.values())
+    for key in freq_patt:
+        if freq_patt[key]==m:
             pat += [key]
     return pat
 
-Text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
+text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
 
-Text[0:4]
+text[0:4]
 
-FrequentWords(Text, 4)
+FrequentWords(text, 4)
 
 bob = {"george":4,
        "kevin":3,
@@ -57,15 +58,15 @@ bob["george"] += 1
 
 bob["larry"] = 1
 
-sample = open(folder+'/dataset_2_10.txt', 'r').read().split('\n')
-Text = sample[0]
+sample = open(folder+'/dataset_2_10.txt', 'r').read().splitlines()
+text = sample[0]
 k = sample[1]
 
-FrequentWords(Text, 12)
+FrequentWords(text, 12)
 
-Text[0]
+text[0]
 
-Text[::-1]
+text[::-1]
 
 def ReverseComplement(text1):
     output = ""
@@ -81,10 +82,10 @@ def ReverseComplement(text1):
             output+="C"
     return output
 
-sample = open(folder+'/dataset_3_2.txt', 'r').read().split('\n')
-Text = sample[0]
+sample = open(folder+'/dataset_3_2.txt', 'r').read().splitlines()
+text = sample[0]
 
-ReverseComplement(Text)
+ReverseComplement(text)
 
 def PatternMatching(pattern, text):
     pos = []
@@ -101,16 +102,16 @@ text[0:4]
 
 PatternMatching(pattern, text)
 
-sample = open(folder+'/dataset_3_5.txt', 'r').read().split('\n')
+sample = open(folder+'/dataset_3_5.txt', 'r').read().splitlines()
 pattern = sample[0]
 text = sample[1]
 
-#Find k-mers that are repeated at least t times in a L length clump
+#Find k-mers that are repeated at least t times in a l length clump
 
-def Clump(genome, k, L, t):
+def Clump(genome, k, l, t):
     dic = {}
     sequences = {}
-    for i in range(L-k+1):
+    for i in range(l-k+1):
         if genome[i:(i+k)] in dic:
             dic[genome[i:(i+k)]] += 1
 #            if dic[genome[i:(i+k)]] >= t:
@@ -118,13 +119,13 @@ def Clump(genome, k, L, t):
         else:
             dic[genome[i:(i+k)]] = 1
         #print(dic)
-    for i in range(L, len(genome)):
+    for i in range(l, len(genome)):
         for key in dic:
             if dic[key] >= t:
                 sequences[key] = ""
                 #print(sequences)
                 #print(dic)
-        dic[genome[i-L:(i-L+k)]] -= 1
+        dic[genome[i-l:(i-l+k)]] -= 1
         if genome[i-k+1:(i+1)] in dic:
             dic[genome[i-k+1:(i+1)]] += 1        
         else:
@@ -140,10 +141,10 @@ Clump(text, 8, 28, 3)
 
 BetterClumpFinding(text, 8, 28, 3)
 
-sample = open(folder+'/dataset_4_5.txt', 'r').read().split('\n')
+sample = open(folder+'/dataset_4_5.txt', 'r').read().splitlines()
 text = sample[0]
 sample[1]
-ecoli = open(folder+'/E_coli.txt', 'r').read().split('\n')
+ecoli = open(folder+'/E_coli.txt', 'r').read().splitlines()
 ecoli1=ecoli[0]
 ecoli1[0:30]
 Clump(ecoli1, 9, 500, 3)
@@ -152,24 +153,24 @@ PatternCount("ACTGTACGATGATGTGTGTCAAAG", "TGT")
 FrequentWords("CGGAGGACTCTAGGTAACGCTTATCAGGTCCATAGGACATTCA",3)
 PatternMatching("CGC","ATGACTTCGCTGTTACGCGC")
 
-def PatternToNumber(Pattern):
-    Pattern = Pattern[::-1]
-    q = len(Pattern) - 1
-    Number = 0
+def PatternToNumber(pattern):
+    pattern = pattern[::-1]
+    q = len(pattern) - 1
+    number = 0
     while q >= 0 :
-        if Pattern[q] == 'A':
+        if pattern[q] == 'A':
             num = 0
-        if Pattern[q] == 'C':
+        if pattern[q] == 'C':
             num = 1
-        if Pattern[q] == 'G':
+        if pattern[q] == 'G':
             num = 2
-        if Pattern[q] == 'T':
+        if pattern[q] == 'T':
             num = 3
-        Number += (num * (4**q))
+        number += (num * (4**q))
         q -= 1
-    return(Number)
+    return(number)
 
-Pattern[::-1]
+pattern[::-1]
 
 912/(4)
 228/4
@@ -178,8 +179,8 @@ Pattern[::-1]
 3.5625%4
 0.890625%4
 
-Pattern = "ATGCAA"
-print(PatternToNumber(Pattern))
+pattern = "ATGCAA"
+print(PatternToNumber(pattern))
 
 def NumberToPattern(index, k):
     num = index
@@ -207,15 +208,15 @@ NumberToPattern(5437, 7)
 NumberToPattern(5437, 8)
 
 
-def ComputingFrequencies(Text, k):
+def ComputingFrequencies(text, k):
     freq = {}
     pattern = ""
     list = []
     for i in range(4**k):
         freq[i] = 0
     #   print(freq)
-    for i in range(len(Text)-k+1):
-        pattern = Text[i:i+k]
+    for i in range(len(text)-k+1):
+        pattern = text[i:i+k]
         j = PatternToNumber(pattern)
         freq[j]+=1
     for i in range(4**k):
@@ -230,34 +231,34 @@ max(x)
 
 max(x.values())
 
-sample = open(folder+"/dataset_2994_5.txt", 'r').read().split("\n")
-Text = sample[0]
+sample = open(folder+"/dataset_2994_5.txt", 'r').read().splitlines()
+text = sample[0]
 k = sample[1]
 k
-x = ComputingFrequencies(Text, 5)
+x = ComputingFrequencies(text, 5)
 f = open(folder+"/answer.txt", 'w')
 f.write()
 
-def FasterFrequentWords(Text, k):
-    FrequentPatterns = []
-    FrequencyArray = ComputingFrequencies(Text, k)
-    maxCount = max(FrequencyArray.values())
-    #print(maxCount)
+def FasterFrequentWords(text, k):
+    freq_patt = []
+    freq_array = ComputingFrequencies(text, k)
+    max_count = max(freq_array.values())
+    #print(max_count)
     for i in range(4**k):
-        if FrequencyArray[i] == maxCount:
-            Pattern = NumberToPattern(i, k)
-            FrequentPatterns.append(Pattern)
-    return FrequentPatterns
+        if freq_array[i] == max_count:
+            pattern = NumberToPattern(i, k)
+            freq_patt.append(pattern)
+    return freq_patt
 
-FrequentWords(Text, 4)
-FasterFrequentWords(Text, 4)
+FrequentWords(text, 4)
+FasterFrequentWords(text, 4)
 
-def LastSymbol(Pattern):
-    pattern2=Pattern[len(Pattern)-1]
+def LastSymbol(pattern):
+    pattern2=pattern[len(pattern)-1]
     return pattern2
 
-def Prefix(Pattern):
-    pattern2 = Pattern[0:(len(Pattern)-1)]
+def Prefix(pattern):
+    pattern2 = pattern[0:(len(pattern)-1)]
     return pattern2
 
 def SymbolToNumber(symbol):
@@ -271,21 +272,21 @@ def SymbolToNumber(symbol):
         return 3
 
 
-def PatternToNumber2(Pattern):
-    if Pattern is not "ACGT":
+def PatternToNumber2(pattern):
+    if pattern is not "ACGT":
         return 0
-    symbol = LastSymbol(Pattern)
-    prefix = Prefix(Pattern)
+    symbol = LastSymbol(pattern)
+    prefix = Prefix(pattern)
     return 4 * PatternToNumber2(Prefix) + SymbolToNumber(symbol)
 
 PatternToNumber(pattern)
 
-sample = open(folder+"/dataset_3010_2.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_3010_2.txt", 'r').read().splitlines()
 pattern = sample[0]
 
 NumberToPattern(8308, 11)
 
-sample = open(folder+"/dataset_3010_5.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_3010_5.txt", 'r').read().splitlines()
 
 z = {1: 3, 20: 2, 4: 2}
 
@@ -300,69 +301,69 @@ z[2]+=1
 
 max(z.values())
 
-def FindingFrequentWordsBySorting(Text, k):
-    FrequentPatterns = []
-    Count = {}
-    for i in range(0, len(Text)-k):
-        Pattern = Text[i:i+k]
-        Index = PatternToNumber(Pattern)
-        if Index in list(Count.keys()):
-            Count[Index] += 1
+def FindingFrequentWordsBySorting(text, k):
+    freq_patt = []
+    count = {}
+    for i in range(0, len(text)-k):
+        pattern = text[i:i+k]
+        Index = PatternToNumber(pattern)
+        if Index in list(count.keys()):
+            count[Index] += 1
         else:
-            Count[Index]=1
-    SortedIndex = sorted(Count)
-#    print(Count)
+            count[Index]=1
+    SortedIndex = sorted(count)
+#    print(count)
     #print(SortedIndex)
 #    for i in range(1, len(SortedIndex)):
 #        if SortedIndex[i] == SortedIndex[i-1]:
-#            Count[SortedIndex[i]] = Count[SortedIndex[i-1]] +1 
-#            print(Count[SortedIndex[i]])
-    maxCount = max(Count.values())
-    #print(maxCount)
-    for key in Count:
-        if Count[key]==maxCount:
-            Pattern = NumberToPattern(key, k)
-            FrequentPatterns.append(Pattern)
-    return FrequentPatterns
+#            count[SortedIndex[i]] = count[SortedIndex[i-1]] +1 
+#            print(count[SortedIndex[i]])
+    max_count = max(count.values())
+    #print(max_count)
+    for key in count:
+        if count[key]==max_count:
+            pattern = NumberToPattern(key, k)
+            freq_patt.append(pattern)
+    return freq_patt
     
-FindingFrequentWordsBySorting(Text, 4)    
+FindingFrequentWordsBySorting(text, 4)    
 
-def BetterClumpFinding(Genome, k, L, t):
-    FrequentPatterns = []
-    Clump = {}
+def BetterClumpFinding(genome, k, l, t):
+    freq_patt = []
+    clump = {}
     for i in range(0, 4**k-1):
-        Clump[i]=0
-    Text = Genome[0:L]
-    FrequencyArray=ComputingFrequencies(Text,k)
-    for key in Clump:
-        if FrequencyArray[key] >= t:
-            Clump[key] += 1
-    for i in range(1, len(Genome)-L):
-        FirstPattern = Genome[i-1:i-1+k]
-        index = PatternToNumber(FirstPattern)
-        FrequencyArray[index] -= 1
-        LastPattern = Genome[i+L-k:i+L]
-        index = PatternToNumber(LastPattern)
-        FrequencyArray[index] += 1
-        if FrequencyArray[index] >= t:
-            Clump[index] = 1
-    for key in Clump:
-        if Clump[key] ==1:
-            Pattern = NumberToPattern(key, k)
-            FrequentPatterns.append(Pattern)
-    return FrequentPatterns
+        clump[i]=0
+    text = genome[0:l]
+    freq_array=ComputingFrequencies(text,k)
+    for key in clump:
+        if freq_array[key] >= t:
+            clump[key] += 1
+    for i in range(1, len(genome)-l):
+        first_patt = genome[i-1:i-1+k]
+        index = PatternToNumber(first_patt)
+        freq_array[index] -= 1
+        last_patt = genome[i+l-k:i+l]
+        index = PatternToNumber(last_patt)
+        freq_array[index] += 1
+        if freq_array[index] >= t:
+            clump[index] = 1
+    for key in clump:
+        if clump[key] ==1:
+            pattern = NumberToPattern(key, k)
+            freq_patt.append(pattern)
+    return freq_patt
             
 
     
-def Skew(Genome):
+def Skew(genome):
     skew = 0
     G = 0
     C = 0
     result = [0]
-    for i in range(len(Genome)):
-        if Genome[i] == "G":
+    for i in range(len(genome)):
+        if genome[i] == "G":
             G +=1
-        if Genome[i] == "C":
+        if genome[i] == "C":
             C +=1
         skew = G - C
         result.append(skew)
@@ -372,8 +373,8 @@ result = Skew("GAGCCACCGCGATA")
 print(*result, sep=" ")
 
 
-def MinSkew(Genome):
-    skew = Skew(Genome)
+def MinSkew(genome):
+    skew = Skew(genome)
     low = min(skew)
     pos = []    
     for i in range(len(skew)):
@@ -384,7 +385,7 @@ def MinSkew(Genome):
 MinSkew("TAAAGACTGCCGAGAGGCCAACACGAGTGCTAGAACGAGGGGCGTAAACGCGGGTCCGAT")
 
 
-sample = open(folder+"/dataset_7_6.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_7_6.txt", 'r').read().splitlines()
 text = sample[0]
 
 MinSkew(text)
@@ -402,28 +403,28 @@ def HammingDistance(p, q):
 p="GGGCCGTTGGT"
 q="GGACCGTTGAC"
 
-sample=open(folder+"/dataset_9_3.txt", 'r').read().split("\n")
+sample=open(folder+"/dataset_9_3.txt", 'r').read().splitlines()
 p = sample[0]
 q=sample[1]
 
 HammingDistance(p,q)
 
-def ApproxPatternMatch(Pattern, Text, d):
+def ApproxPatternMatch(pattern, text, d):
     result = []
-    n = len(Pattern)
-    for i in range(len(Text)-n+1):
-        x = HammingDistance(Pattern, Text[i:i+n])
+    n = len(pattern)
+    for i in range(len(text)-n+1):
+        x = HammingDistance(pattern, text[i:i+n])
         #print(x)
         if x <= d:
             result.append(i)
     x = len(result)
     return x
 
-def ApproximatePatternMatching(Text, Pattern, d):
+def ApproximatePatternMatching(text, pattern, d):
     result = []
-    n = len(Pattern)
-    for i in range(len(Text)-n+1):
-        x = HammingDistance(Pattern, Text[i:i+n])
+    n = len(pattern)
+    for i in range(len(text)-n+1):
+        x = HammingDistance(pattern, text[i:i+n])
         #print(x)
         if x <= d:
             result.append(i)
@@ -434,31 +435,31 @@ ApproxPatternMatch("ATTCTGGA","CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCAC
 
 ApproxPatternMatch("CCC", "CATGCCATTCGCATTGTCCCAGTGA", 2)
 
-Pattern = "ATTCTGGA"
-Text = "CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACGGACGTCAATCAAAT"
+pattern = "ATTCTGGA"
+text = "CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACGGACGTCAATCAAAT"
 
-sample=open(folder+"/dataset_9_4.txt", 'r').read().split("\n")
-Pattern = sample[0]
-Text=sample[1]
+sample=open(folder+"/dataset_9_4.txt", 'r').read().splitlines()
+pattern = sample[0]
+text=sample[1]
 sample[2]
 
-x = ApproxPatternMatch(Pattern, Text, 6)
+x = ApproxPatternMatch(pattern, text, 6)
 print(*x, sep = " ")
 
-def Count2(Text, Pattern):
-    x = len(ApproxPatternMatch(Pattern, Text, 2))
+def Count2(text, pattern):
+    x = len(ApproxPatternMatch(pattern, text, 2))
     return x
 
 Count2("CATGCCATTCGCATTGTCCCAGTGA", "CCC")
 
 ApproxPatternMatch("GAGG","TTTAGAGCCTTCAGAGG", 2)
 
-sample = open(folder+"/dataset_9_6.txt", 'r').read().split("\n")
-Pattern= sample[0]
-Text=sample[1]
+sample = open(folder+"/dataset_9_6.txt", 'r').read().splitlines()
+pattern= sample[0]
+text=sample[1]
 n=sample[2]
 
-ApproxPatternMatch(Pattern, Text, 2)
+ApproxPatternMatch(pattern, text, 2)
 
 n = {"a":1, "b":2, "c":3}
 list(n.keys())
@@ -469,13 +470,13 @@ bases=['A','T','G','C']
 x = [''.join(p) for p in itertools.product(bases, repeat=4)]
 len(x[0])
 
-def FrequentMismatch(Text, k, d):
+def FrequentMismatch(text, k, d):
     bases=['A','T','G','C']
     kmers = [''.join(p) for p in itertools.product(bases, repeat=k)]
     dic = {}        
     for j in range(len(kmers)):
-        for i in range(len(Text)-k+1):
-            x = HammingDistance(kmers[j], Text[i:i+k])
+        for i in range(len(text)-k+1):
+            x = HammingDistance(kmers[j], text[i:i+k])
 
             if x <= d:
                 if kmers[j] in list(dic.keys()):
@@ -488,29 +489,29 @@ def FrequentMismatch(Text, k, d):
             keys.append(key)
     return keys
 
-Text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
+text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
    4 1
    
-FrequentMismatch(Text, 4, 1)
+FrequentMismatch(text, 4, 1)
 
-sample = open(folder+"/dataset_9_7.txt", 'r').read().split('\n')
-Text=sample[0]
+sample = open(folder+"/dataset_9_7.txt", 'r').read().splitlines()
+text=sample[0]
 sample[1]
 sample[2]
 
 
-x = FrequentMismatch(Text, 6, 3)
+x = FrequentMismatch(text, 6, 3)
 print(*x, sep=" ")
 
-def FrequentMismatchRC(Text, k, d):
+def FrequentMismatchRC(text, k, d):
     bases=['A','T','G','C']
     kmers = [''.join(p) for p in itertools.product(bases, repeat=k)]
     dic = {}        
-    RCText = ReverseComplement(Text)
+    RCText = ReverseComplement(text)
     for j in range(len(kmers)):
-        for i in range(len(Text)-k+1):
-            x = HammingDistance(kmers[j], Text[i:i+k])
-            y = HammingDistance(kmers[j], Text[i:i+k])
+        for i in range(len(text)-k+1):
+            x = HammingDistance(kmers[j], text[i:i+k])
+            y = HammingDistance(kmers[j], text[i:i+k])
             if x <= d:
                 if kmers[j] in list(dic.keys()):
                     dic[kmers[j]]+=1
@@ -537,40 +538,40 @@ FrequentMismatch(test, 4, 1)
 
 HammingDistance("CTTGAAGTGGACCTCTAGTTCCTCTACAAAGAACAGGTTGACCTGTCGCGAAG", "ATGCCTTACCTAGATGCAATGACGGACGTATTCCTTTTGCCTCAACGGCTCCT")
 
-sample=open(folder+"/dataset_9_8.txt", 'r').read().split("\n")
+sample=open(folder+"/dataset_9_8.txt", 'r').read().splitlines()
 text=sample[0]
 sample[1]
 FrequentMismatchRC(text, 5, 2)
             
-#    Neighbors(Pattern, d)
+#    Neighbors(pattern, d)
 #        if d = 0
-#            return {Pattern}
-#        if |Pattern| = 1 
+#            return {pattern}
+#        if |pattern| = 1 
 #            return {A, C, G, T}
-#        Neighborhood ← an empty set
-#        SuffixNeighbors ← Neighbors(Suffix(Pattern), d)
-#        for each string Text from SuffixNeighbors
-#            if HammingDistance(Suffix(Pattern), Text) < d
+#        neighborhood ← an empty set
+#        suffix_neighbors ← Neighbors(Suffix(pattern), d)
+#        for each string text from suffix_neighbors
+#            if HammingDistance(Suffix(pattern), text) < d
 #                for each nucleotide x
-#                    add x • Text to Neighborhood
+#                    add x • text to neighborhood
 #            else
-#                add FirstSymbol(Pattern) • Text to Neighborhood
-#        return Neighborhood
-def Neighbors(Pattern, d):
+#                add FirstSymbol(pattern) • text to neighborhood
+#        return neighborhood
+def Neighbors(pattern, d):
     if d == 0:
-        return Pattern
-    elif len(Pattern) == 1: 
+        return pattern
+    elif len(pattern) == 1: 
         return {'A', 'C', 'G', 'T'}
-    Neighborhood = []
-    SuffixNeighbors = Neighbors(Pattern[1:], d)
-    for Text in SuffixNeighbors:
+    neighborhood = []
+    suffix_neighbors = Neighbors(pattern[1:], d)
+    for text in suffix_neighbors:
         nucleotides = {'A', 'C', 'G', 'T'}
-        if HammingDistance(Pattern[1:], Text) < d:
+        if HammingDistance(pattern[1:], text) < d:
             for x in nucleotides:
-                Neighborhood.append(x + Text)
+                neighborhood.append(x + text)
         else:
-            Neighborhood.append(Pattern[0] + Text)
-    return Neighborhood
+            neighborhood.append(pattern[0] + text)
+    return neighborhood
 
 prac = ["dog", "liger", "kitten", "dog"]
 prac2 = {"dog":1, "liger":0, "kitten":3}
@@ -590,25 +591,25 @@ prac["zebra"]=1
 prac.defaultdict("dog", []).append(1)
 prac.remove("liger")
 
-def MotifEnumeration(Dna, k, d):
+def MotifEnumeration(dna, k, d):
     motifs = []
-    for i in range(len(Dna)):
+    for i in range(len(dna)):
         if i == 0:
-            for j in range(len(Dna[i])-k+1):
-                Pattern = (Dna[i][j:j+k])
-                Patternp=Neighbors(Pattern, d)
-                if isinstance(Patternp, str)==True:  #If there's only one value, it's a string not a list.
-                    motifs.append(Patternp)
+            for j in range(len(dna[i])-k+1):
+                pattern = (dna[i][j:j+k])
+                pattern_p=Neighbors(pattern, d)
+                if isinstance(pattern_p, str)==True:  #If there's only one value, it's a string not a list.
+                    motifs.append(pattern_p)
                 else:
-                    motifs.extend(Patternp)
+                    motifs.extend(pattern_p)
     motifs = list(set(motifs))
     temp = {}
     removemotif = []
-    for j in range(1, len(Dna)):
+    for j in range(1, len(dna)):
         for motif in motifs:
             #print(motif)
-            for i in range(len(Dna[j])-k+1):
-                if HammingDistance(motif, Dna[j][i:i+k]) <= d:
+            for i in range(len(dna[j])-k+1):
+                if HammingDistance(motif, dna[j][i:i+k]) <= d:
                     if motif in list(temp.keys()):
                         temp[motif]+=1
                     else:
@@ -638,7 +639,7 @@ MotifEnumeration(test, 3, 0)
 text = ["ATTTGGC", "TGCCTTA", "CGGTATC", "GAAAATT"]
 MotifEnumeration(text, 3, 1)
 
-text = open(folder+"/dataset_156_8.txt", 'r').read().split("\n")
+text = open(folder+"/dataset_156_8.txt", 'r').read().splitlines()
 thing = text[1:len(text)-1]
 text[0]
 
@@ -653,36 +654,36 @@ A A A G C T G C T G
 
 import math
 
-def Count(Motifs):
+def Count(motifs):
     count = {} # initializing the count dictionary
-    k = len(Motifs[0]) #get the length of each motif row (x axis)
+    k = len(motifs[0]) #get the length of each motif row (x axis)
     for symbol in "ACGT": #Make A C G T a key
         count[symbol] = [] #make an empty list for each key
         for j in range(k): #for the length of the motif...
             count[symbol].append(0) #...for the key, put a zero for each position in the list for now
-    t = len(Motifs) #get the number of keys in the dictionary (y axis)
+    t = len(motifs) #get the number of keys in the dictionary (y axis)
     for i in range(t): #for every key...
         for j in range(k): #for list position in each key...
-            symbol = Motifs[i][j] #for this specific position for a key...
+            symbol = motifs[i][j] #for this specific position for a key...
             count[symbol][j] += 1 #Add one every time this position occurs in the matrix at this position
     # your code here
     return count
 
 
-def Profile(Motifs):
-    t = len(Motifs)
-    k = len(Motifs[0])
+def Profile(motifs):
+    t = len(motifs)
+    k = len(motifs[0])
     profile = {}
-    profile = Count(Motifs)
-    sub= Count(Motifs)
+    profile = Count(motifs)
+    sub= Count(motifs)
     for x in range(t): #for key in position x...
         for y in range(k): #for list position in that key...
-            symbol=Motifs[x][y]
+            symbol=motifs[x][y]
             profile[symbol][y]=(sub[symbol][y])/t
     # insert your code here
     return profile
 
-Motifs = [
+motifs = [
 "TCGGGGGTTTTT",
 "CCGGTGACTTAC",
 "ACGGGGATTTTC",
@@ -695,7 +696,7 @@ Motifs = [
 "TCGGGTATAACC"
 ]
 
-test = Profile(Motifs)
+test = Profile(motifs)
 
 test["A"][1]
 
@@ -703,8 +704,8 @@ math.log2(test["A"][1])
 
 len(test["A"])
 
-def entropy(Motifs):
-    prof = Profile(Motifs)
+def entropy(motifs):
+    prof = Profile(motifs)
     result = []
     result2 = 0
     for i in range(len(prof["A"])):
@@ -727,7 +728,7 @@ def entropy(Motifs):
 0.25*math.log2(0.25)*2+0.5*math.log2(0.5)
 
 
-entropy(Motifs)
+entropy(motifs)
 
 def HammingDistance(p, q):
     dist = 0
@@ -753,19 +754,19 @@ cat = []
 
 cat.append(dog)
 
-def Motifs(Pattern, Dna):
+def Motifs(pattern, dna):
     motifs = []
-    print(Pattern)
-    k= len(Pattern)
-    if isinstance(Dna, str)==True: #verify if the input is a list or a string
-        DNA = []
-        DNA.append(Dna)
-        Dna = DNA
-    for seq in Dna:
+    print(pattern)
+    k= len(pattern)
+    if isinstance(dna, str)==True: #verify if the input is a list or a string
+        new_dna = []
+        new_dna.append(dna)
+        dna = new_dna
+    for seq in dna:
         score = k
         temp_motif = {}
         for i in range(len(seq)-k+1):
-            new_score = HammingDistance(Pattern, seq[i:i+k])
+            new_score = HammingDistance(pattern, seq[i:i+k])
             if new_score < score:
                 temp_motif[seq[i:i+k]]=new_score
         if len(temp_motif)==0:
@@ -778,64 +779,64 @@ def Motifs(Pattern, Dna):
                     break
     return motifs
 
-Dna = ["TTACCTTAAC", "GATATCTGTC", "ACGGCGTTCG", "CCCTAAAGAG"]    
+dna = ["TTACCTTAAC", "GATATCTGTC", "ACGGCGTTCG", "CCCTAAAGAG"]    
 
-Motifs("AAA", Dna)
+motifs("AAA", dna)
 
-Motifs("GATTCTCA", "GCAAAGACGCTGACCAA")
+motifs("GATTCTCA", "GCAAAGACGCTGACCAA")
 
-Motifs("AAG", "GCAATCCTCAGC")
+motifs("AAG", "GCAATCCTCAGC")
 
-def d(Pattern, Dna):
-    motifs = Motifs(Pattern, Dna)
+def d(pattern, dna):
+    motifs = Motifs(pattern, dna)
     if len(motifs)==0:
-        return len(Pattern)
+        return len(pattern)
     score = 0
     for motif in motifs:
-        x = HammingDistance(Pattern, motif)
+        x = HammingDistance(pattern, motif)
         score += x
     return score
 
-d("AAA", Dna)
+d("AAA", dna)
 
-d("GAC", Dna)
+d("GAC", dna)
 
-def MedianString(Dna, k):
+def MedianString(dna, k):
     kmers = []
-    Median = ""
-    if isinstance(Dna, str)==True:
-        distance = len(Dna)
-        for i in range(len(Dna)-k+1):
-            kmers.append(Dna[i:i+k])
+    median = ""
+    if isinstance(dna, str)==True:
+        distance = len(dna)
+        for i in range(len(dna)-k+1):
+            kmers.append(dna[i:i+k])
     else:
-        distance = len(Dna[0])
-        for seq in Dna:
+        distance = len(dna[0])
+        for seq in dna:
             for i in range(len(seq)-k+1):
                 kmers.append(seq[i:i+k])
     kmers = list(dict.fromkeys(kmers)) #remove duplicates
     #print(kmers)
     for kmer in kmers:
-        if distance > d(kmer, Dna):
-            distance = d(kmer, Dna)
-            Median = kmer
+        if distance > d(kmer, dna):
+            distance = d(kmer, dna)
+            median = kmer
             print(kmer)
             print(distance)
-    return Median
+    return median
 
 MedianString(text, 7)
 MedianString2(text, 7)
 
 #Search kmers not in the main text
-def MedianString2(Dna, k):
+def MedianString2(dna, k):
     kmers = []
-    Median = []
-    if isinstance(Dna, str)==True:
-        distance = len(Dna)*10
-        for i in range(len(Dna)-k+1):
-            kmers.append(Dna[i:i+k])
+    median = []
+    if isinstance(dna, str)==True:
+        distance = len(dna)*10
+        for i in range(len(dna)-k+1):
+            kmers.append(dna[i:i+k])
     else:
-        distance = len(Dna[0])*len(Dna)
-        for seq in Dna:
+        distance = len(dna[0])*len(dna)
+        for seq in dna:
             for i in range(len(seq)-k+1):
                 kmers.append(seq[i:i+k])
     kmers = list(dict.fromkeys(kmers)) #remove duplicates
@@ -848,45 +849,45 @@ def MedianString2(Dna, k):
     #print(kmers)
     #print(kmers2)
     for kmer in kmers2:
-        if distance > d(kmer, Dna):
-            distance = d(kmer, Dna)
-            Median = []
-            Median.append(kmer)
+        if distance > d(kmer, dna):
+            distance = d(kmer, dna)
+            median = []
+            median.append(kmer)
             #print(kmer)
             #print(distance)
-        elif distance == d(kmer, Dna):
-            Median.append(kmer)
-    return Median
+        elif distance == d(kmer, dna):
+            median.append(kmer)
+    return median
 
 test = ["ATA","ACA","AGA","AAT","AAC"]
 
 d("AAA", test)
 
 MedianString2(test, 3)
-Motifs("GTC", test)
-Motifs("AAA", test)
+motifs("GTC", test)
+motifs("AAA", test)
 d("GTC", test)
 d("GAT", test)
 
-Motifs("GAT", test)
+motifs("GAT", test)
 
 d("AAA", test)
 
-MedianString2(Dna, 3)
+MedianString2(dna, 3)
 
 3
-Dna = ["AAATTGACGCAT", "GACGACCACGTT", "CGTCAGCGCCTG", "GCTGAGCACCGG", "AGTTCGGGACAG"]
+dna = ["AAATTGACGCAT", "GACGACCACGTT", "CGTCAGCGCCTG", "GCTGAGCACCGG", "AGTTCGGGACAG"]
 
-Motifs("GAC", Dna)
+motifs("GAC", dna)
 
-d("GAC", Dna)
+d("GAC", dna)
 
-MedianString(Dna, 3)
+MedianString(dna, 3)
 
-sample = open(folder+"/dataset_158_9.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_158_9.txt", 'r').read().splitlines()
 text = sample[0]
 text2 = sample[1]
-Dna = ['TGTTGGAAATATCACGTGGACCCTCTCGTGCAGTGGATATAA',
+dna = ['TGTTGGAAATATCACGTGGACCCTCTCGTGCAGTGGATATAA',
  'TGTCCGCGGCAACACCCTAGTGCCGGAGCCGGATCTGTGCAA',
  'TGGGCGTGGACGTACCCTGACCCCCAATTTCGTGAGTATCAA',
  'CTTCATAATTATAACCCTATTTTCAGTCACGAGCACCCTAAG',
@@ -897,12 +898,12 @@ Dna = ['TGTTGGAAATATCACGTGGACCCTCTCGTGCAGTGGATATAA',
  'GTGCAGGGCGTAAGATAGAACCCTGCTACGAGCCGTGGAAAC',
  'CAGAACACCCGCGCAAGAGACCCTTCGGTAGGAATCATGCCT']
 
-MedianString(Dna, 6)
+MedianString(dna, 6)
 
-def Pr(Text, Profile):
+def Pr(text, profile):
     p=1
-    for i in range(len(Text)):
-        p=p*Profile[Text[i]][i]
+    for i in range(len(text)):
+        p=p*profile[text[i]][i]
     return p
 
 profile = {
@@ -936,7 +937,7 @@ profile = {
 
 ProfileMostProbableKmer("ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATATAGCCCGAGGGCCT",5, profile)
 
-sample = open(folder+"/dataset_159_3.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_159_3.txt", 'r').read().splitlines()
 text=sample[0]
 
 profile = {
@@ -947,50 +948,50 @@ profile = {
 
 ProfileMostProbableKmer(text, 13, profile)
 
-def CountWithPseudocounts(Motifs):
+def CountWithPseudocounts(motifs):
     count = {} # initializing the count dictionary
-    k = len(Motifs[0]) #get the length of each motif row (x axis)
+    k = len(motifs[0]) #get the length of each motif row (x axis)
     for symbol in "ACGT": #Make A C G T a key
         count[symbol] = [] #make an empty list for each key
         for j in range(k): #for the length of the motif...
             count[symbol].append(1) #...for the key, put a one for each position in the list for now
-    t = len(Motifs) #get the number of keys in the dictionary (y axis)
+    t = len(motifs) #get the number of keys in the dictionary (y axis)
     for i in range(t): #for every key...
         for j in range(k): #for list position in each key...
-            symbol = Motifs[i][j] #for this specific position for a key...
+            symbol = motifs[i][j] #for this specific position for a key...
             count[symbol][j] += 1 #Add one every time this position occurs in the matrix at this position
     # your code here
     return count
 
-def ProfileWithPseudocounts(Motifs):
-    t = len(Motifs)
-    k = len(Motifs[0])
+def ProfileWithPseudocounts(motifs):
+    t = len(motifs)
+    k = len(motifs[0])
     profile = {}
-    profile = CountWithPseudocounts(Motifs)
-    sub= CountWithPseudocounts(Motifs)
+    profile = CountWithPseudocounts(motifs)
+    sub= CountWithPseudocounts(motifs)
     for symbol in "ACGT":
         for y in range(k):
             profile[symbol][y]=float(sub[symbol][y])/(t+4)
     # insert your code here
     return profile
 
-def GreedyMotifSearch(Dna, k, t):
-    BestMotifs=[]
+def GreedyMotifSearch(dna, k, t):
+    best_motifs=[]
     for i in range(0, t):
-        BestMotifs.append(Dna[i][0:k]) #sets BestMotifs to the first three k-mers in each row
-    n=len(Dna[0]) #how long each row is
+        best_motifs.append(dna[i][0:k]) #sets best_motifs to the first three k-mers in each row
+    n=len(dna[0]) #how long each row is
     for i in range(n-k+1): #iterate through each row as a k-mer
-        Motifs=[] #set up an empty motif matrix
-        Motifs.append(Dna[0][i:i+k]) #fill Motif matrix with k-mer
+        motifs=[] #set up an empty motif matrix
+        motifs.append(dna[0][i:i+k]) #fill motif matrix with k-mer
         for j in range(1,t): #go through each row in the matrix
-            P=ProfileWithPseudocounts(Motifs[0:j]) #give a score for each nucleotide for the motif
-            Motifs.append(ProfileMostProbableKmer(Dna[j],k,P)) #For the j row, get the motif with the highest score using the profile scores
-        if Score(Motifs) < Score(BestMotifs):
-            BestMotifs=Motifs
-    return BestMotifs
+            p=ProfileWithPseudocounts(motifs[0:j]) #give a score for each nucleotide for the motif
+            motifs.append(ProfileMostProbableKmer(dna[j],k,p)) #For the j row, get the motif with the highest score using the profile scores
+        if Score(motifs) < Score(best_motifs):
+            best_motifs=motifs
+    return best_motifs
 
-sample=open(folder+"/dataset_159_5.txt", 'r').read().split("\n")
-Dna = ['GTACAAGTGAACGGCTGTTTACAGTCGGAGTAGCAGGTCTTCTGTTATTGGCGATGGCCGGTATATACGAAAGGCGAAGCGTGGTGCGATCTCTTTGCCTGTGCTCTCCGAATCCCTAGGGAGCGCAATCATAGGCTCTCCCTGCAAATGGAGCGT',
+sample=open(folder+"/dataset_159_5.txt", 'r').read().splitlines()
+dna = ['GTACAAGTGAACGGCTGTTTACAGTCGGAGTAGCAGGTCTTCTGTTATTGGCGATGGCCGGTATATACGAAAGGCGAAGCGTGGTGCGATCTCTTTGCCTGTGCTCTCCGAATCCCTAGGGAGCGCAATCATAGGCTCTCCCTGCAAATGGAGCGT',
  'TAAACATAAGCCACCGGCTCCCTCTTTAAGCACAGCCCACCGCACAGAACCGATGCGTCCGATGAAATCAGTGACTGGTGGAAGTTAAGAGCTCTAGGCTGTCGACGCGCCTCGCTCTCGGTCCCCCCTTGAAGGGCCTCCCTGTAGTCAGGACAA',
  'AAACTCGCTGAGTTTAACTGCGCCGTCGTCTCTGGTTCAGGTGTGCTAAAGCCAGGTCCATTTGGCACTTAGACATGCACTCACATTTTCCTTCTGCGGACCTCCCTGTGGCACTTATAGCAAGAGGATTCACCCGAAGGACCGTCCGGAAAAATA',
  'CGGCACCTACACTTTACCCTGGGATGAGTTGCCTCATAATGTGTTGATAATGGCATATAGTCCAAACTGCCCAGGCGCTCCATGCAACTAATCGTGCATCTTTCCCTGTCTCTCCGTGCACGATAGTGTGGAACGGACAGGACGATGCGCTCGAGC',
@@ -1016,13 +1017,13 @@ Dna = ['GTACAAGTGAACGGCTGTTTACAGTCGGAGTAGCAGGTCTTCTGTTATTGGCGATGGCCGGTATATACGAAA
  'GGGGTCTCCTTGTGGGGATAAACCATAGGCAGTCGAGCAACATAACCTCTTGGCTATGATATATGTTTAGACAACTGTTGCCCCTAATGCTGGTCCCATTCAAAAGTGTATGAATCGGCTAAAATTAGTCAGGCTGTCGATTACTACCCGTAGAGA',
  'CTCGCCTCTGTCTAGACCCCTTATCGTCCTACTATAGGCATCTCGATCTCCTGGAGGAGAGAATTACTATTCTATGTATCGGGAGGATAAAGGTAATTCACCACACTTCGTCAATTGGACGGGCACTCCCTGATGGTTTGAACCACACTCATGTGA']
 
-text = GreedyMotifSearch(Dna, 12, 25)
+text = GreedyMotifSearch(dna, 12, 25)
 
 print(*text, sep=" ")
 
 print(*list(sequences.keys()), sep=" ")
 
-sample = open(folder+"/dataset_160_9.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_160_9.txt", 'r').read().splitlines()
 text = ['GAGCCCCATTCCGCGCGATGCTCCTTACCGAGGGTTTCGCGAAAGGCTCACATGCTAGTTAGTTCGGCGAAGACAGCTGTGGGAGTTATCCGGCCCCTGTGCCCTAAGCAGTTTTGGATTACTGTCCGATTGATGCGCAGCTCAGACTCTTAGTCT',
  'TCACGGCCTGTGTTGATCGGTCCTAGAGTACAAGTACACCATACGAAAGAATACGTCCGTGCAGGCGGAACGCCATGTGTTAAATGCCCTGAAGATGTAATAAGGGAGGAGACTCTAGTTCCCTGCCACATACCCAACGTAACCAGTAGTTCCAAA',
  'ATTCCCCGAGTCGTTTCTAAAGACCGCACGTTAATTCGCGAGGGGAGAACTAGATAATGCAGCGAAACGGCGAACGCGCTAGAAGTTGAAGGTACCCCAGCCAGCGGTAACATATAAAGAATGTAATATCGTCTTACTCTCAGGCAAAGGCTAGTT',
@@ -1060,7 +1061,7 @@ text = ["GGCGTTCAGGCA",
 
 GreedyMotifSearch(text, 3, 5)
 
-sample = open(folder+"/dataset_5164_1.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_5164_1.txt", 'r').read().splitlines()
 pattern = sample[0]
 text = sample[1].split(" ")
 
@@ -1092,7 +1093,7 @@ AAA
 d("AAA", test)
 test = ["TTACCTTAAC", "GATATCTGTC", "ACGGCGTTCG", "CCCTAAAGAG", "CGTCAGAGGT"]
 
-Motifs("AAA", test)
+motifs("AAA", test)
 
 test=["TCTGCAGAGCGCAAGCGTCTCAATGTTTTTCGCTGCAAGTGTTAGCTGCGTTTGTCGACACACAAATGAAGTGACCACATCAAACCTAATTATG",
       "TCCCGCTCGAGGACAGACACCGGTGCAGCCGAGGGTATTATAGTCTGCTCGTATGGTTTGTATGGAGGATAATAGATGGGGTGACGAAATGAGA", 
@@ -1150,31 +1151,31 @@ GreedyMotifSearch(test, 5,8)
 
 import random
 
-def RandomMotifs(Dna, k, t):
+def RandomMotifs(dna, k, t):
     sub = []
     for i in range(t-1):
-        x = random.randint(1, (len(Dna[i])-k))
-        sub.append(Dna[i][x:x+k])
+        x = random.randint(1, (len(dna[i])-k))
+        sub.append(dna[i][x:x+k])
     return sub
 
 
-def RandomizedMotifSearch(Dna,k,t):
-    M = RandomMotifs(Dna, k, t)
-    BestMotifs = M
+def RandomizedMotifSearch(dna,k,t):
+    m = RandomMotifs(dna, k, t)
+    best_motifs = m
     while True:
-        Profile = ProfileWithPseudocounts(M)
-        M = Motifs(Profile, Dna)
-        if Score(M) < Score(BestMotifs):
-            BestMotifs = M
+        profile = ProfileWithPseudocounts(m)
+        m = Motifs(profile, dna)
+        if Score(m) < Score(best_motifs):
+            best_motifs = m
         else:
-            return BestMotifs 
+            return best_motifs 
 
 DNA = ["TGACGTTC", "TAAGAGTT", "GGACGAAA", "CTGTTCGC"]
 test = ["TGA", "GTT", "GAA", "TGT"]
 profile = ProfileWithPseudocounts(test)
 Motifs(profile, DNA)
 
-sample = open(folder+"/dataset_161_5.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_161_5.txt", 'r').read().splitlines()
 text = sample[1:len(sample)-1]
 text[0]
 len(text)
@@ -1205,21 +1206,21 @@ for i in range(0,N):
     score=Score(tempmotif)
     if score<score1:
         score1=score
-        BestMotifs=tempmotif
+        best_motifs=tempmotif
 
-print(*BestMotifs, "\n")
+print(*best_motifs, "\n")
 
 
-def Motifs(Profile, Dna):
-    kmer=len(Profile['A'])
-    pattern=Dna.copy()
-    for j in range(len(Dna)):
+def Motifs(profile, dna):
+    kmer=len(profile['A'])
+    pattern=dna.copy()
+    for j in range(len(dna)):
         score=5000
-        for i in range(len(Dna[j])-kmer+1):
-            score2=Pr(Dna[j][i:i+kmer], Profile)
+        for i in range(len(dna[j])-kmer+1):
+            score2=Pr(dna[j][i:i+kmer], profile)
             if score2<score:
                 score=score2
-                pattern[j]=Dna[j][i:i+kmer]
+                pattern[j]=dna[j][i:i+kmer]
             if score2==score:
                 pattern[j]=pattern[j]
     return pattern
@@ -1247,21 +1248,21 @@ test = [4, 2, 1]
 
 random.uniform(0,1)
 
-def Random(ProbProf):
-    NewProf = {}
+def Random(prob_prof):
+    new_prof = {}
     total = 0
-    for key in ProbProf:
-        total += ProbProf[key]
-    for key in ProbProf:
-        NewProf[key] = ProbProf[key]/total
-    SumProf = {}
+    for key in prob_prof:
+        total += prob_prof[key]
+    for key in prob_prof:
+        new_prof[key] = prob_prof[key]/total
+    sum_prof = {}
     y = 0 #add them gradually together so you can look for ones that are in a range
-    for key in NewProf:
-        y += NewProf[key]
-        SumProf[key] = y
+    for key in new_prof:
+        y += new_prof[key]
+        sum_prof[key] = y
     randomint = random.uniform(0,1)
-    for key in SumProf:
-        if randomint <= SumProf[key]:
+    for key in sum_prof:
+        if randomint <= sum_prof[key]:
             #print(randomint, key)
             return key
 
@@ -1277,8 +1278,8 @@ test = {"seq1": .6,
 
 #Gibbs Sampler Problem
 
-sample = open(folder+"/dataset_163_4.txt", 'r').read().split("\n")
-sample = open(folder+"/gibbs.txt", 'r').read().split("\n")
+sample = open(folder+"/dataset_163_4.txt", 'r').read().splitlines()
+sample = open(folder+"/gibbs.txt", 'r').read().splitlines()
 sample[0]
 text = sample[1:len(sample)-1]
 text[len(text)-1]
@@ -1320,15 +1321,15 @@ for i in range(0,N):
     score=Score(tempmotif)
     if score<score1:
         score1=score
-        BestMotifs=tempmotif
+        best_motifs=tempmotif
 
-# Input:  Integers k, t, and N, followed by a collection of strings Dna
-# Output: GibbsSampler(Dna, k, t, N)
-def GibbsSampler(Dna, k, t, N):
+# Input:  Integers k, t, and N, followed by a collection of strings dna
+# Output: GibbsSampler(dna, k, t, N)
+def GibbsSampler(dna, k, t, N):
     score1 = 5000
     bestmotif = []
     for i in range(0,70):
-        tempmotif=RandomizedMotifSearch(Dna,k,t)
+        tempmotif=RandomizedMotifSearch(dna,k,t)
         score=Score(tempmotif)
         if score<score1:
             score1=score
@@ -1340,23 +1341,23 @@ def GibbsSampler(Dna, k, t, N):
             if b!= i:
                 reducedmotif.append(bestmotif[b])
         prof = ProfileWithPseudocounts(reducedmotif)
-        Mi = ProfileGeneratedString(Dna[i], prof, k)
-        reducedmotif.insert(i, Mi)
+        mi = ProfileGeneratedString(dna[i], prof, k)
+        reducedmotif.insert(i, mi)
         if Score(reducedmotif) < Score(bestmotif):
             bestmotif=reducedmotif
     return bestmotif
 
 # place all subroutines needed for GibbsSampler below this line
-def RandomizedMotifSearch(Dna,k,t):
-    M = RandomMotifs(Dna, k, t)
-    BestMotifs = M
+def RandomizedMotifSearch(dna,k,t):
+    m = RandomMotifs(dna, k, t)
+    best_motifs = m
     while True:
-        Profile = ProfileWithPseudocounts(M)
-        M = Motifs(Profile, Dna)
-        if Score(M) < Score(BestMotifs):
-            BestMotifs = M
+        profile = ProfileWithPseudocounts(m)
+        m = Motifs(profile, dna)
+        if Score(m) < Score(best_motifs):
+            best_motifs = m
         else:
-            return BestMotifs 
+            return best_motifs 
 
 
 def Normalize(Probabilities):
@@ -1383,63 +1384,63 @@ def WeightedDie(Probabilities):
             return kmer
 
         
-def Pr(Text, Profile):
+def Pr(text, profile):
     p=1
-    for i in range(len(Text)):
-        p=p*Profile[Text[i]][i]
+    for i in range(len(text)):
+        p=p*profile[text[i]][i]
     return p  
 
-def ProfileGeneratedString(Text, profile, k):
-    n=len(Text)
+def ProfileGeneratedString(text, profile, k):
+    n=len(text)
     probabilities={}
     for i in range(0, n-k+1):
-        probabilities[Text[i:i+k]]=Pr(Text[i:i+k], profile)
+        probabilities[text[i:i+k]]=Pr(text[i:i+k], profile)
     probabilities=Normalize(probabilities)
     return WeightedDie(probabilities)
 
-def RandomMotifs(Dna, k, t):
+def RandomMotifs(dna, k, t):
     sub = []
     for i in range(t):
-        x = random.randint(1, (len(Dna[i])-k))
-        sub.append(Dna[i][x:x+k])
+        x = random.randint(1, (len(dna[i])-k))
+        sub.append(dna[i][x:x+k])
     return sub
 
 
-def Motifs(Profile, Dna):
-    kmer=len(Profile['A'])
-    pattern=Dna.copy()
-    for j in range(len(Dna)):
+def Motifs(profile, dna):
+    kmer=len(profile['A'])
+    pattern=dna.copy()
+    for j in range(len(dna)):
         score=-1
-        for i in range(len(Dna[j])-kmer+1):
-            score2=Pr(Dna[j][i:i+kmer], Profile)
+        for i in range(len(dna[j])-kmer+1):
+            score2=Pr(dna[j][i:i+kmer], profile)
             if score2<score:
                 score=score2
-                pattern[j]=Dna[j][i:i+kmer]
+                pattern[j]=dna[j][i:i+kmer]
             if score2==score:
                 pattern[j]=pattern[j]
     return pattern
 
-def CountWithPseudocounts(Motifs):
+def CountWithPseudocounts(motifs):
     count = {} # initializing the count dictionary
-    k = len(Motifs[0]) #get the length of each motif row (x axis)
+    k = len(motifs[0]) #get the length of each motif row (x axis)
     for symbol in "ACGT": #Make A C G T a key
         count[symbol] = [] #make an empty list for each key
         for j in range(k): #for the length of the motif...
             count[symbol].append(1) #...for the key, put a one for each position in the list for now
-    t = len(Motifs) #get the number of keys in the dictionary (y axis)
+    t = len(motifs) #get the number of keys in the dictionary (y axis)
     for i in range(t): #for every key...
         for j in range(k): #for list position in each key...
-            symbol = Motifs[i][j] #for this specific position for a key...
+            symbol = motifs[i][j] #for this specific position for a key...
             count[symbol][j] += 1#Add one every time this position occurs in the matrix at this position
     # your code here
     return count
 
-def ProfileWithPseudocounts(Motifs):
-    t = len(Motifs)
-    k = len(Motifs[0])
+def ProfileWithPseudocounts(motifs):
+    t = len(motifs)
+    k = len(motifs[0])
     profile = {}
-    profile = CountWithPseudocounts(Motifs)
-    sub= CountWithPseudocounts(Motifs)
+    profile = CountWithPseudocounts(motifs)
+    sub= CountWithPseudocounts(motifs)
     for symbol in "ACGT":
         for y in range(k):
             profile[symbol][y]=float(sub[symbol][y])/(t+4)
@@ -1458,35 +1459,35 @@ def ProfileMostProbableKmer(text, k, profile):
             pattern=pattern
     return pattern
 
-def Score(Motifs):
-    con = Consensus(Motifs)
-    k = len(Motifs[0])
-    j=len(Motifs)
+def Score(motifs):
+    con = Consensus(motifs)
+    k = len(motifs[0])
+    j=len(motifs)
     value=0
     for x in range(k):
         for y in range(j):
-            if Motifs[y][x]!=con[x]:
+            if motifs[y][x]!=con[x]:
                 value+=1
     return value
 
-def Pr(Text, Profile):
+def Pr(text, profile):
     p=1
-    for i in range(len(Text)):
-        p=p*Profile[Text[i]][i]
+    for i in range(len(text)):
+        p=p*profile[text[i]][i]
     return p
 
-def Consensus(Motifs):
-    k = len(Motifs[0])
-    count = CountWithPseudocounts(Motifs)
+def Consensus(motifs):
+    k = len(motifs[0])
+    count = CountWithPseudocounts(motifs)
     consensus = ""
     for j in range(k):
         m = 0
-        frequentSymbol = ""
+        frequent_symbol = ""
         for symbol in "ACGT":
             if count[symbol][j] > m:
                 m = count[symbol][j]
-                frequentSymbol = symbol
-        consensus += frequentSymbol
+                frequent_symbol = symbol
+        consensus += frequent_symbol
     return consensus
 
 sample = open(folder+"/upstream250.txt", 'r').readlines()
