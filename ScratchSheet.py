@@ -13,15 +13,15 @@ def PatternCount(Text, Pattern):
     return count 
 
     
-def FrequencyMap(Text, k):
+def FrequencyMap(text, k):
     freq = {}
-    n = len(Text)
+    n = len(text)
     for i in range(n-k+1):
-        Pattern = Text[i:i+k]
-        freq[Pattern] = 0
-        for i in range(len(Text)-k+1):
-            if Text[i:i+k] == Pattern:
-                freq[Pattern] = freq[Pattern]+1
+        pattern = text[i:i+k]
+        if pattern in freq:
+            freq[pattern]+=1
+        else:
+            freq[pattern]=1
     return freq
 
 Text = "ATCAATGATCAACGTAAGCTTCTAAGCATGATCAAGGTGCTCACACAGTTTATCCACAACCTGAGTGGATGACATCAAGATAGGTCGTTGTATCTCCTTCCTCTCGTACTCTCATGACCACGGAAAGATGATCAAGAGAGGATGATTTCTTGGCCATATCGCAATGAATACTTGTGACTTGTGCTTCCAATTGACATCTTCAGCGCCATATTGCGCTGGCCAAGGTGACGGAGCGGGATTACGAAAGCATGATCATGGCTGTTGTTCTGTTTATCTTGTTTTGACTGAGACTTGTTAGGATAGACGGTTTTTCATCACTGACTAGCCAAAGCCTTACTCTGCCTGACATCGACCGTAAATTGATAATGAATTTACATGCTTCCGCGACGATTTACCTCTTGATCATCGATCCGATTGAAGATCTTCAATTGTTAATTCTCTTGCCTCGACTCATAGCCATGATGAGCTCTTGATCATGTTTCCTTAACCCTCTATTTTTTACGGAAGAATGATCAAGCTGCTGCTCTTGATCATCGTTTC"
@@ -31,7 +31,6 @@ test = FrequencyMap(Text, 3)
 
 test["ATA"]
 
-        
 FrequencyMap(Text, k)
 
 m = max(freq.values())
